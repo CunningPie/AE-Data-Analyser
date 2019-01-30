@@ -100,9 +100,9 @@
     <Compile Include="Correlation\MathSupportFunctions.cs" />
     <Compile Include="Correlation\PearsonCorrelation.cs" />
     <Compile Include="RFunctions.cs" />
-    <Compile Include="DataAnalysis.cs" />
-    <Compile Include="DataReader.cs" />
-    <Compile Include="Interfaces.cs" />
+    <Compile Include="Data File\DataAnalysis.cs" />
+    <Compile Include="Data File\DataReader.cs" />
+    <Compile Include="Abstractions\Interfaces.cs" />
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>

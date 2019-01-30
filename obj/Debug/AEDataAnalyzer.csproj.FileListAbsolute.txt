@@ -29,3 +29,4 @@ C:\Users\Pavel\Source\Repos\AEDataAnalyzer\bin\Debug\RDotNet.NativeLibrary.xml
 C:\Users\Pavel\Source\Repos\AEDataAnalyzer\obj\Debug\AEDataAnalyzer.csproj.CopyComplete
 C:\Users\Pavel\Source\Repos\AEDataAnalyzer\obj\Debug\AEDataAnalyzer.CorrelationOptions.resources
 C:\Users\Pavel\Source\Repos\AEDataAnalyzer\obj\Debug\AEDataAnalyzer.User_Interface.PlotAttributes.resources
+C:\Users\Pavel\Source\Repos\AEDataAnalyzer\obj\Debug\AEDataAnalyzer.csprojResolveAssemblyReference.cache

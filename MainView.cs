@@ -417,16 +417,34 @@ namespace AEDataAnalyzer
                         {
                             var pair = new KeyValuePair<Wave, Wave>(Waves[i], w);
 
+                            Wave wave = w;
+                            /*
+                            if (Waves[i].Events.Count > w.Events.Count)
+                                switch (param)
+                                {
+                                    case "Time":
+                                        ValuesX = (from SensorInfo si in SupportFunctions.PointSelection(w, Waves[i]).Events select si.MSec).ToList();
+                                        break;
+                                    case "Energy":
+                                        ValuesX = (from SensorInfo si in SupportFunctions.PointSelection(w, Waves[i]).Events select si.Energy).ToList();
+                                        break;
+                                    case "Amplitude":
+                                        ValuesX = (from SensorInfo si in SupportFunctions.PointSelection(w, Waves[i]).Events select si.Amplitude).ToList();
+                                        break;
+                                }
+                            else if (Waves[i].Events.Count < w.Events.Count)
+                                wave = SupportFunctions.PointSelection(Waves[i], w);
+*/
                             switch (param)
                             {
                                 case "Time":
-                                    ValuesY = (from SensorInfo si in w.Events select si.MSec).ToList();
+                                    ValuesY = (from SensorInfo si in wave.Events select si.MSec).ToList();
                                     break;
                                 case "Energy":
-                                    ValuesY = (from SensorInfo si in w.Events select si.Energy).ToList();
+                                    ValuesY = (from SensorInfo si in wave.Events select si.Energy).ToList();
                                     break;
                                 case "Amplitude":
-                                    ValuesY = (from SensorInfo si in w.Events select si.Amplitude).ToList();
+                                    ValuesY = (from SensorInfo si in wave.Events select si.Amplitude).ToList();
                                     break;
                             }
 

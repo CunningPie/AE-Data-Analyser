@@ -14,8 +14,8 @@ namespace AEDataAnalyzer
             int i = 0;
             double SumNumerator = 0, SumDenominatorX = 0, SumDenominatorY = 0;
 
-            double meanValueX = MathSupportFunctions.MeanValue(ValuesX),
-                   meanValueY = MathSupportFunctions.MeanValue(ValuesY);
+            double meanValueX = SupportFunctions.MeanValue(ValuesX),
+                   meanValueY = SupportFunctions.MeanValue(ValuesY);
 
 
             while (i < ValuesX.Count() && i < ValuesY.Count())

@@ -79,18 +79,21 @@ namespace AEDataAnalyzer
             engine.Evaluate("png(fileName,  width=20, height=20, units='in', res = 200)");
             engine.SetSymbol("time" + 0, CreateCharacterVector(TimeList[0]));
             engine.SetSymbol("amplitude" + 0, CreateCharacterVector(ValuesYList[0]));
-            engine.Evaluate("plot(time" + 0 + ",amplitude" + 0 + ", type = 'b', lwd = 4, col=rgb(1, 0, 0), xlab=\"time\", ylab=\"amplitude\", xlim = c(0, 1000), ylim = c(40, 100))");
-            //engine.Evaluate("text(time" + 0 + ",amplitude" + 0 + ", label = 1,cex = 2, col = 'red')");
-            //engine.Evaluate("text(amplitude0, time0, labels = 2,, col = 'red')");
-           
+            engine.Evaluate("plot(time" + 0 + ",amplitude" + 0 + ", type = 'b',pch = " + 0 + ",cex = 1.5, cex.lab = 1.8, cex.axis = 2, lwd.axis = 2, lwd = 4, col=rgb(1, 0, 0), xlab=\"Time\", ylab=\"Amplitude\", xlim = c(0, 1000), ylim = c(40, 100))");
+
 
             for (int i = 1; i < Waves.Count(); i++)
             {
                 engine.SetSymbol("time" + i, CreateCharacterVector(TimeList[i]));
                 engine.SetSymbol("amplitude" + i, CreateCharacterVector(ValuesYList[i]));
-                engine.Evaluate("lines(time" + i + ",amplitude" + i + ", type = 'b', lwd = 3)");
-                //engine.Evaluate("text(amplitude" + i + ",time" + i + ", labels = 2,cex = 1)");
+                engine.Evaluate("lines(time" + i + ",amplitude" + i + ",pch = " + i + ",cex = 1.5, type = 'b', lwd = 3)");
             }
+
+            engine.SetSymbol("numbers", CreateCharacterVector((from Wave w in Waves select w.Number.ToString()).ToArray()));
+            engine.Evaluate("legend(\"topright\", legend = c(numbers), pch = 0:" + Waves.Count + ",title = \"Waves\", cex = 2)");
+
+
+
 
             engine.Evaluate("dev.off()");
         }

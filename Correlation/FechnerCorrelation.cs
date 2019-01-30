@@ -13,8 +13,8 @@ namespace AEDataAnalyzer.Correlation
             int i = 0;
             double nA = 0, nB = 0; // nA - отклонение от среднего в одну сторону, nB - отклонение от среднего в разные стороны
 
-            double meanValueX = MathSupportFunctions.MeanValue(ValuesX),
-                   meanValueY = MathSupportFunctions.MeanValue(ValuesY);
+            double meanValueX = SupportFunctions.MeanValue(ValuesX),
+                   meanValueY = SupportFunctions.MeanValue(ValuesY);
 
             while (i < ValuesX.Count() && i < ValuesY.Count())
             {
