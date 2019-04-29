@@ -35,6 +35,9 @@
             this.Menu_Tools_FindWaves = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tools_Plot = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tools_Correlation = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Tools_Show_Waves = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Tools_Create_Super_Waves = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Tool_SW_Set_Correlation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +73,10 @@
             this.Menu_Tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Tools_FindWaves,
             this.Menu_Tools_Plot,
-            this.Menu_Tools_Correlation});
+            this.Menu_Tools_Correlation,
+            this.Menu_Tools_Show_Waves,
+            this.Menu_Tools_Create_Super_Waves,
+            this.Menu_Tool_SW_Set_Correlation});
             this.Menu_Tools.Name = "Menu_Tools";
             this.Menu_Tools.Size = new System.Drawing.Size(56, 24);
             this.Menu_Tools.Text = "Tools";
@@ -99,6 +105,29 @@
             this.Menu_Tools_Correlation.Text = "Correlation";
             this.Menu_Tools_Correlation.Click += new System.EventHandler(this.Menu_Tools_Correlation_Click);
             // 
+            // Menu_Tools_Show_Waves
+            // 
+            this.Menu_Tools_Show_Waves.Enabled = false;
+            this.Menu_Tools_Show_Waves.Name = "Menu_Tools_Show_Waves";
+            this.Menu_Tools_Show_Waves.Size = new System.Drawing.Size(216, 26);
+            this.Menu_Tools_Show_Waves.Text = "Show Waves ";
+            this.Menu_Tools_Show_Waves.Click += new System.EventHandler(this.Menu_Tools_Show_Waves_Click);
+            // 
+            // Menu_Tools_Create_Super_Waves
+            // 
+            this.Menu_Tools_Create_Super_Waves.Enabled = false;
+            this.Menu_Tools_Create_Super_Waves.Name = "Menu_Tools_Create_Super_Waves";
+            this.Menu_Tools_Create_Super_Waves.Size = new System.Drawing.Size(216, 26);
+            this.Menu_Tools_Create_Super_Waves.Text = "Create Super Waves";
+            this.Menu_Tools_Create_Super_Waves.Click += new System.EventHandler(this.Menu_Tools_Create_Super_Waves_Click);
+            // 
+            // Menu_Tool_SW_Set_Correlation
+            // 
+            this.Menu_Tool_SW_Set_Correlation.Name = "Menu_Tool_SW_Set_Correlation";
+            this.Menu_Tool_SW_Set_Correlation.Size = new System.Drawing.Size(216, 26);
+            this.Menu_Tool_SW_Set_Correlation.Text = "SW Set Correlation";
+            this.Menu_Tool_SW_Set_Correlation.Click += new System.EventHandler(this.Menu_Tool_SW_Set_Correlation_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -124,6 +153,9 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Tools_FindWaves;
         private System.Windows.Forms.ToolStripMenuItem Menu_Tools_Plot;
         private System.Windows.Forms.ToolStripMenuItem Menu_Tools_Correlation;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Tools_Show_Waves;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Tools_Create_Super_Waves;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Tool_SW_Set_Correlation;
     }
 }
 

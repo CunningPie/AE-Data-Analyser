@@ -25,8 +25,8 @@ namespace AEDataAnalyzer
 
         private void OK_Click(object sender, EventArgs e)
         {
-            if (!Amplitude.Checked && !Energy.Checked && !Time.Checked ||
-                !PearsonCoeff.Checked && FechnerCoeff.Checked ||
+            if (!Amplitude.Checked && !Energy.Checked && !Time.Checked && !CountsDuration.Checked ||
+                !PearsonCoeff.Checked && !FechnerCoeff.Checked ||
                 !Sum.Checked && !Mult.Checked)
             {
                 MessageBox.Show("Выберите опции для корреляции!");
@@ -41,6 +41,9 @@ namespace AEDataAnalyzer
 
                 if (Time.Checked)
                     Params.Add("Time");
+
+                if (CountsDuration.Checked)
+                    Params.Add("CountsDuration");
 
                 if (PearsonCoeff.Checked)
                     CorrelationTypes.Add("Pearson");
@@ -65,6 +68,11 @@ namespace AEDataAnalyzer
         private void Mult_CheckedChanged(object sender, EventArgs e)
         {
             Sum.Checked = !Sum.Checked;
+        }
+
+        private void Counts_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void Cancel_Click(object sender, EventArgs e)

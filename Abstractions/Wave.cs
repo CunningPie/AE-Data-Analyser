@@ -16,5 +16,11 @@ namespace AEDataAnalyzer
             Events = NewWave.ToList();
             Number = NewNumber;
         }
+
+        public Wave(Wave NewWave)
+        {
+            Number = NewWave.Number;
+            Events = new List<SensorInfo>(NewWave.Events);
+        }
     }
 }

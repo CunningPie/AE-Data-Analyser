@@ -31,6 +31,7 @@
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.Options = new System.Windows.Forms.GroupBox();
+            this.CountsDuration = new System.Windows.Forms.CheckBox();
             this.Time = new System.Windows.Forms.CheckBox();
             this.Energy = new System.Windows.Forms.CheckBox();
             this.Amplitude = new System.Windows.Forms.CheckBox();
@@ -47,9 +48,9 @@
             // 
             // OK
             // 
-            this.OK.Location = new System.Drawing.Point(286, 131);
+            this.OK.Location = new System.Drawing.Point(286, 156);
             this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(100, 25);
+            this.OK.Size = new System.Drawing.Size(100, 26);
             this.OK.TabIndex = 1;
             this.OK.Text = "OK";
             this.OK.UseVisualStyleBackColor = true;
@@ -57,9 +58,9 @@
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(392, 131);
+            this.Cancel.Location = new System.Drawing.Point(392, 156);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(100, 25);
+            this.Cancel.Size = new System.Drawing.Size(100, 26);
             this.Cancel.TabIndex = 2;
             this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
@@ -67,15 +68,27 @@
             // 
             // Options
             // 
+            this.Options.Controls.Add(this.CountsDuration);
             this.Options.Controls.Add(this.Time);
             this.Options.Controls.Add(this.Energy);
             this.Options.Controls.Add(this.Amplitude);
             this.Options.Location = new System.Drawing.Point(22, 13);
             this.Options.Name = "Options";
-            this.Options.Size = new System.Drawing.Size(147, 112);
+            this.Options.Size = new System.Drawing.Size(147, 137);
             this.Options.TabIndex = 3;
             this.Options.TabStop = false;
             this.Options.Text = "Options";
+            // 
+            // CountsDuration
+            // 
+            this.CountsDuration.AutoSize = true;
+            this.CountsDuration.Location = new System.Drawing.Point(7, 106);
+            this.CountsDuration.Name = "CountsDuration";
+            this.CountsDuration.Size = new System.Drawing.Size(132, 21);
+            this.CountsDuration.TabIndex = 3;
+            this.CountsDuration.Text = "Counts/Duration";
+            this.CountsDuration.UseVisualStyleBackColor = true;
+            this.CountsDuration.CheckedChanged += new System.EventHandler(this.Counts_CheckedChanged);
             // 
             // Time
             // 
@@ -115,7 +128,7 @@
             this.CorrelationType.Controls.Add(this.PearsonCoeff);
             this.CorrelationType.Location = new System.Drawing.Point(187, 13);
             this.CorrelationType.Name = "CorrelationType";
-            this.CorrelationType.Size = new System.Drawing.Size(179, 112);
+            this.CorrelationType.Size = new System.Drawing.Size(179, 137);
             this.CorrelationType.TabIndex = 4;
             this.CorrelationType.TabStop = false;
             this.CorrelationType.Text = "Correlation Type";
@@ -148,7 +161,7 @@
             this.Operation.Controls.Add(this.Sum);
             this.Operation.Location = new System.Drawing.Point(373, 13);
             this.Operation.Name = "Operation";
-            this.Operation.Size = new System.Drawing.Size(119, 112);
+            this.Operation.Size = new System.Drawing.Size(119, 137);
             this.Operation.TabIndex = 5;
             this.Operation.TabStop = false;
             this.Operation.Text = "Operation";
@@ -181,7 +194,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 162);
+            this.ClientSize = new System.Drawing.Size(509, 194);
             this.Controls.Add(this.Operation);
             this.Controls.Add(this.CorrelationType);
             this.Controls.Add(this.Options);
@@ -213,5 +226,6 @@
         private System.Windows.Forms.GroupBox Operation;
         private System.Windows.Forms.CheckBox Mult;
         private System.Windows.Forms.CheckBox Sum;
+        private System.Windows.Forms.CheckBox CountsDuration;
     }
 }

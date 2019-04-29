@@ -29,12 +29,24 @@ namespace AEDataAnalyzer
                 }
             }
 
+            for (int i = 0; i < Data.Count; i++)
+            {
+                if (Data[i].SensorType == "Ev")
+                    while (i < Data.Count && Data[i].SensorType != "LE")
+                    {
+                        Data.RemoveAt(i);
+                    }
+            }
+
             return Data;
         }
 
         public SensorInfo ParseString(string String)
         {
             SensorInfo sensor = null;
+
+            if (String == "")
+                return sensor;
 
             String = String.Insert(2, " ");
 
@@ -78,6 +90,7 @@ namespace AEDataAnalyzer
                         case "threshold":
                             break;
                         case "counts":
+                            sensor.Counts = Convert.ToInt32(Values[i]);
                             break;
                         case "rms":
                             break;
@@ -121,7 +134,7 @@ namespace AEDataAnalyzer
                         Columns.Add("Energy", new KeyValuePair<int, int>(i, 6));
                         break;
                     case "r":
-                        Columns.Add("RiseTime", new KeyValuePair<int, int>(i, 8));
+                        Columns.Add("RiseTime", new KeyValuePair<int, int>(i, 10));
                         break;
                     case "d":
                         Columns.Add("Duration", new KeyValuePair<int, int>(i, 7));
@@ -130,7 +143,7 @@ namespace AEDataAnalyzer
                         Columns.Add("Threshold", new KeyValuePair<int, int>(i, 9));
                         break;
                     case "cnts":
-                        Columns.Add("Counts", new KeyValuePair<int, int>(i, 10));
+                        Columns.Add("Counts", new KeyValuePair<int, int>(i, 8));
                         break;
                     case "rms":
                         Columns.Add("Rms", new KeyValuePair<int, int>(i, 11));
