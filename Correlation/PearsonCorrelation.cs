@@ -14,6 +14,7 @@ namespace AEDataAnalyzer
         public const double Time = 0.99;
         public const double Energy = 0.99;
         public const double Default = 0.85;
+        public const double SuperSignalsThresholds = 0.9;
     }
 
     class PearsonCriticalValuesTable
@@ -124,10 +125,10 @@ namespace AEDataAnalyzer
 
             double rCoeff = SumNumerator / Math.Sqrt(SumDenominatorX * SumDenominatorY);
             
-            
+            /*
             if (!TCriteria(rCoeff, ValuesX.Count + ValuesY.Count, pValues.FindValue(ValuesX.Count + ValuesY.Count, 0.05)))
                 rCoeff = 0;
-             
+             */
             return rCoeff;
         }
 

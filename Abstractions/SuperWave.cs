@@ -10,7 +10,7 @@ namespace AEDataAnalyzer
     {
         public Wave Wave;
         public int Powerset;
-        public double CoeffSum = 0;
+        public double CoeffSum = 1;
         public string Number;
 
         public SuperWave( Wave newWave )
@@ -18,12 +18,12 @@ namespace AEDataAnalyzer
             Wave = newWave;
         }
 
-        public SuperWave( IEnumerable<Wave> Waves )
+        public SuperWave( IEnumerable<Wave> Waves, int NewNumber)
         {
-            Wave = CreateSuperWave(Waves);
+            Wave = CreateSuperWave(Waves, NewNumber);
         }
 
-        Wave CreateSuperWave( IEnumerable<Wave> Waves )
+        Wave CreateSuperWave( IEnumerable<Wave> Waves, int NewNumber)
         {
 
             Powerset = Waves.Count();
@@ -40,6 +40,8 @@ namespace AEDataAnalyzer
                         Points.Add(new SensorInfo(w.Events[i]));
                     else
                     {
+                        Points[i].Channel = 0;
+                        Points[i].SensorType = w.Events[i].SensorType;
                         Points[i].Amplitude += w.Events[i].Amplitude;
                         Points[i].Counts += w.Events[i].Counts;
                         Points[i].Duration += w.Events[i].Duration;
@@ -62,7 +64,7 @@ namespace AEDataAnalyzer
             }
 
 
-            return new Wave(Points, -1);
+            return new Wave(Points, NewNumber);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AEDataAnalyzer.Correlation;
+using AEDataAnalyzer.Data_File;
 using AEDataAnalyzer.User_Interface;
 using System;
 using System.Collections.Generic;
@@ -315,7 +316,7 @@ namespace AEDataAnalyzer
                 {
                     int i = Waves.FindIndex(w => w == pair.Key.Key), j = Waves.FindIndex(w => w == pair.Key.Value);
 
-                    dataGrid.Rows.Add(k++, i + ", " + j, Math.Round(pair.Value, 4));
+                    dataGrid.Rows.Add(k++, i + ", " + j, Math.Abs(Math.Round(pair.Value, 4)));
 
                     if (pair.Value > Thresholds[thresholdNum])
                         dataGrid.Rows[rowNum].DefaultCellStyle.BackColor = Color.LightGreen;
@@ -382,7 +383,7 @@ namespace AEDataAnalyzer
                     else
                         row.Cells[cell].Style.BackColor = Color.White;
 
-                    row.Cells[cell++].Value = Math.Round(d, 2);
+                    row.Cells[cell++].Value = Math.Abs(Math.Round(d, 2));
                 }
 
                 dataGrid.Rows.Add(row);
@@ -581,7 +582,7 @@ namespace AEDataAnalyzer
 
                     if (CorrectWaves.Count >= 3)
                     {
-                        SuperWave superWave = new SuperWave(CorrectWaves);
+                        SuperWave superWave = new SuperWave(CorrectWaves, i);
 
                         if (superWave.Powerset < 12)
                             AllSuperWaves.Add(superWave, CorrectWaves);
@@ -596,26 +597,31 @@ namespace AEDataAnalyzer
                 {
                     if (w1 != w2)
                     {
-                        var corrCoeff = PearsonCorrelation.Coefficient(w1.Wave, w2.Wave, "Amplitude", pValues) + PearsonCorrelation.Coefficient(w1.Wave, w2.Wave, "Time", pValues);
+                        var corrCoeff = Math.Abs(PearsonCorrelation.Coefficient(w1.Wave, w2.Wave, "Amplitude", pValues) * PearsonCorrelation.Coefficient(w1.Wave, w2.Wave, "Time", pValues));
 
                         SWCorrTable.Add(new KeyValuePair<Wave, Wave>(w1.Wave, w2.Wave), corrCoeff);
 
-                        if (corrCoeff == 2 && w2.CoeffSum != double.PositiveInfinity)
+                        if (corrCoeff >= PearsonThresholds.SuperSignalsThresholds)
                         {
-                            w1.CoeffSum = double.PositiveInfinity;
-                            break;
+                            if (w1.Powerset > w2.Powerset && w1.CoeffSum < double.PositiveInfinity)
+                                w2.CoeffSum = double.PositiveInfinity;
+                            else if (w2.CoeffSum < double.PositiveInfinity)
+                            {
+                                w1.CoeffSum = double.PositiveInfinity;
+                                break;
+                            }
+
                         }
 
-                        w1.CoeffSum += corrCoeff;
+                        w1.CoeffSum *= corrCoeff;
                     }
                 }
 
             var SelectedClusters = AllSuperWaves.Keys.ToList();
 
-
             SelectedClusters = (from SuperWave sw in SelectedClusters where sw.CoeffSum < Double.PositiveInfinity orderby sw.CoeffSum select sw).ToList().Take(5).ToList();
 
-            SuperWaves.AddRange(SelectedClusters);
+            SelectedClusters = (from SuperWave sw in SelectedClusters orderby sw.Powerset descending select sw).Take(2).ToList();
 
             int swNum = 0;
 
@@ -633,7 +639,17 @@ namespace AEDataAnalyzer
                 Tabs.Controls.Add(page);
             }
 
-            ConstructCorrelationMatrix(SWCorrTable, "SWCorrTable");
+
+            DataWriter dw = new DataWriter();
+
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                dw.WriteNewSuperSignalsFile(ofd.FileName,  CurrentFileName, SelectedClusters);
+            }
+            //ConstructCorrelationMatrix(SWCorrTable, "SWCorrTable");
         }
 
         private void Menu_Tool_SW_Set_Correlation_Click(object sender, EventArgs e)

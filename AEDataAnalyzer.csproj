@@ -90,8 +90,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Correlation\ClusteringAnalysis.cs" />
     <Compile Include="Correlation\WilcoxonCorrelation.cs" />
     <Compile Include="Abstractions\SuperWave.cs" />
+    <Compile Include="Data File\DataWriter.cs" />
     <Compile Include="User Interface\CorrelationOptions.cs">
       <SubType>Form</SubType>
     </Compile>
