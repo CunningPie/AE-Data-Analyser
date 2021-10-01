@@ -38,6 +38,7 @@
             this.Menu_Tools_Show_Waves = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tools_Create_Super_Waves = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tool_SW_Set_Correlation = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Tools_STF = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             // Menu_File_Open
             // 
             this.Menu_File_Open.Name = "Menu_File_Open";
-            this.Menu_File_Open.Size = new System.Drawing.Size(216, 26);
+            this.Menu_File_Open.Size = new System.Drawing.Size(120, 26);
             this.Menu_File_Open.Text = "Open";
             this.Menu_File_Open.Click += new System.EventHandler(this.Menu_File_Open_Click);
             // 
@@ -76,7 +77,8 @@
             this.Menu_Tools_Correlation,
             this.Menu_Tools_Show_Waves,
             this.Menu_Tools_Create_Super_Waves,
-            this.Menu_Tool_SW_Set_Correlation});
+            this.Menu_Tool_SW_Set_Correlation,
+            this.Menu_Tools_STF});
             this.Menu_Tools.Name = "Menu_Tools";
             this.Menu_Tools.Size = new System.Drawing.Size(56, 24);
             this.Menu_Tools.Text = "Tools";
@@ -128,6 +130,13 @@
             this.Menu_Tool_SW_Set_Correlation.Text = "SW Set Correlation";
             this.Menu_Tool_SW_Set_Correlation.Click += new System.EventHandler(this.Menu_Tool_SW_Set_Correlation_Click);
             // 
+            // Menu_Tools_STF
+            // 
+            this.Menu_Tools_STF.Name = "Menu_Tools_STF";
+            this.Menu_Tools_STF.Size = new System.Drawing.Size(216, 26);
+            this.Menu_Tools_STF.Text = "Save TXT file";
+            this.Menu_Tools_STF.Click += new System.EventHandler(this.Menu_Tools_STF_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -156,6 +165,7 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Tools_Show_Waves;
         private System.Windows.Forms.ToolStripMenuItem Menu_Tools_Create_Super_Waves;
         private System.Windows.Forms.ToolStripMenuItem Menu_Tool_SW_Set_Correlation;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Tools_STF;
     }
 }
 

@@ -119,6 +119,8 @@ namespace AEDataAnalyzer
                 Menu_Tools_Correlation.Enabled = false;
                 Menu_Tools_Show_Waves.Enabled = false;
                 Menu_Tools_Create_Super_Waves.Enabled = false;
+                Menu_Tools_STF.Enabled = false;
+                Menu_Tool_SW_Set_Correlation.Enabled = false;
 
                 Menu_Tools_FindWaves.Enabled = true;
 
@@ -202,6 +204,7 @@ namespace AEDataAnalyzer
 
                 Menu_Tools_Correlation.Enabled = true;
                 Menu_Tools_Show_Waves.Enabled = true;
+                Menu_Tools_STF.Enabled = true;
             }
         }
 
@@ -654,6 +657,27 @@ namespace AEDataAnalyzer
 
         private void Menu_Tool_SW_Set_Correlation_Click(object sender, EventArgs e)
         {
+        }
+
+        private void Menu_Tools_STF_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog();
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                {
+                    sw.WriteLine("Num Event Time Channel Amplitude");
+                    foreach (Wave w in Waves)
+                    {
+                        var firstSITime = w.Events[0].Time;
+                        var firstSIMsec = w.Events[0].MSec;
+
+                        foreach (SensorInfo si in w.Events)
+                          sw.WriteLine((w.Number + " " + si.SensorType + " " + ((si.Time - firstSITime).Milliseconds + (si.MSec - firstSIMsec)) + " " + si.Channel + " " + si.Amplitude).Replace(",", "."));
+                    }
+                }
+            }
         }
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="Correlation\WilcoxonCorrelation.cs" />
     <Compile Include="Abstractions\SuperWave.cs" />
     <Compile Include="Data File\DataWriter.cs" />
+    <Compile Include="MLClusterization.cs" />
     <Compile Include="User Interface\CorrelationOptions.cs">
       <SubType>Form</SubType>
     </Compile>

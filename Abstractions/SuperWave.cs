@@ -63,7 +63,6 @@ namespace AEDataAnalyzer
                 si.Time = TimeSpan.Zero;
             }
 
-
             return new Wave(Points, NewNumber);
         }
     }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AEDataAnalyzer
 {
@@ -17,15 +18,23 @@ namespace AEDataAnalyzer
 
             using (StreamReader reader = new StreamReader(FileName))
             {
-                string Params = reader.ReadLine();
-                ParseParams(Params);
-
-                while (!reader.EndOfStream)
+                try
                 {
-                    SensorInfo info = ParseString(reader.ReadLine());
+                    string Params = reader.ReadLine();
+                    ParseParams(Params);
 
-                    if (info != null)
-                        Data.Add(info);
+                    while (!reader.EndOfStream)
+                    {
+
+                        SensorInfo info = ParseString(reader.ReadLine());
+
+                        if (info != null)
+                            Data.Add(info);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
 
@@ -61,45 +70,46 @@ namespace AEDataAnalyzer
                 if (Values.Count() < Columns.Count && Columns.ContainsKey("TRAI"))
                     Values.Insert(Columns["TRAI"].Key, "0");
 
-                for (int i = 0; i < Values.Count(); i++)
-                    switch (Columns.Keys.ToArray()[i].ToLower())
-                    {
-                        case "id":
-                            sensor.SensorType = type;
-                            break;
-                        case "channel":
-                            sensor.Channel = Convert.ToInt32(Values[i]);
-                            break;
-                        case "amplitude":
-                            sensor.Amplitude = Convert.ToDouble(Values[i]);
-                            break;
-                        case "time":
-                            sensor.Time = TimeSpan.Parse(Values[i]);
-                            break;
-                        case "msec":
-                            sensor.MSec = Convert.ToDouble(Values[i]);
-                            break;
-                        case "energy":
-                            sensor.Energy = Convert.ToDouble(Values[i]);
-                            break;
-                        case "duration":
-                            sensor.Duration = Convert.ToDouble(Values[i]);
-                            break;
-                        case "risetime":
-                            break;
-                        case "threshold":
-                            break;
-                        case "counts":
-                            sensor.Counts = Convert.ToInt32(Values[i]);
-                            break;
-                        case "rms":
-                            break;
-                        case "linear amplitude":
-                            break;
-                        case "trai":
-                            break;
+                    for (int i = 0; i < Values.Count(); i++)
+                        switch (Columns.Keys.ToArray()[i].ToLower())
+                        {
+                            case "id":
+                                sensor.SensorType = type;
+                                break;
+                            case "channel":
+                                sensor.Channel = Convert.ToInt32(Values[i]);
+                                break;
+                            case "amplitude":
+                                sensor.Amplitude = Convert.ToDouble(Values[i]);
+                                break;
+                            case "time":
+                                sensor.Time = TimeSpan.Parse(Values[i]);
+                                break;
+                            case "msec":
+                                sensor.MSec = Convert.ToDouble(Values[i]);
+                                break;
+                            case "energy":
+                                sensor.Energy = Convert.ToDouble(Values[i]);
+                                break;
+                            case "duration":
+                                sensor.Duration = Convert.ToDouble(Values[i]);
+                                break;
+                            case "risetime":
+                                break;
+                            case "threshold":
+                                break;
+                            case "counts":
+                                sensor.Counts = Convert.ToInt32(Values[i]);
+                                break;
+                            case "rms":
+                                break;
+                            case "linear amplitude":
+                                break;
+                            case "trai":
+                                break;
 
-                    }
+                        }
+
             }
 
             return sensor;
@@ -153,6 +163,12 @@ namespace AEDataAnalyzer
                         break;
                     case "trai":
                         Columns.Add("TRAI", new KeyValuePair<int, int>(i, 13));
+                        break;
+                    case "dset":
+                        Columns.Add("DSet", new KeyValuePair<int, int>(i, 14));
+                        break;
+                    case "dt1x":
+                        Columns.Add("DT1X", new KeyValuePair<int, int>(i, 14));
                         break;
                 }
                 i++;

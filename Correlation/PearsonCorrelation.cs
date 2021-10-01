@@ -10,7 +10,7 @@ namespace AEDataAnalyzer
 {
     public static class PearsonThresholds
     {
-        public const double Amplitude = 0.9;
+        public const double Amplitude = 0.97;
         public const double Time = 0.99;
         public const double Energy = 0.99;
         public const double Default = 0.85;
@@ -125,10 +125,9 @@ namespace AEDataAnalyzer
 
             double rCoeff = SumNumerator / Math.Sqrt(SumDenominatorX * SumDenominatorY);
             
-            /*
             if (!TCriteria(rCoeff, ValuesX.Count + ValuesY.Count, pValues.FindValue(ValuesX.Count + ValuesY.Count, 0.05)))
                 rCoeff = 0;
-             */
+
             return rCoeff;
         }
 
