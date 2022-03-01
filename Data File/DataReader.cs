@@ -107,9 +107,7 @@ namespace AEDataAnalyzer
                                 break;
                             case "trai":
                                 break;
-
                         }
-
             }
 
             return sensor;
@@ -119,7 +117,7 @@ namespace AEDataAnalyzer
         {
             string[] Labels = String.Split(" ".ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
-            int i = 0;
+            int i = 1;
 
             foreach (string label in Labels)
             {

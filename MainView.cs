@@ -146,7 +146,7 @@ namespace AEDataAnalyzer
             if (Analyser != null && Analyser.Data.Count > 0)
             {
                 Waves = new List<Wave>();
-                int wave_num = 0;
+                int wave_num = 1;
 
                 for (int i = 0; i < Analyser.Data.Count; i++)
                 {
@@ -159,7 +159,8 @@ namespace AEDataAnalyzer
                         while (i < Analyser.Data.Count() && Analyser.Data[i].SensorType == "Ht" )//Analyser.Data[i].SensorType != "LE" && (double)(Analyser.Data[i].Time.Seconds - NewWave[0].Time.Seconds) * 1000 + Analyser.Data[i].MSec - NewWave[0].MSec < 1000)
                             NewWave.Add(Analyser.Data[i++]);
 
-                        Waves.Add(new Wave(NewWave, wave_num++));
+                        if (NewWave.Count > 3)
+                            Waves.Add(new Wave(NewWave, wave_num++));
                         --i;
                     }
                 }
@@ -175,24 +176,27 @@ namespace AEDataAnalyzer
 
                 foreach (Wave w in Waves)
                 {
-                    foreach (SensorInfo si in w.Events)
+                    if (w.Events.Count > 3)
                     {
-                        var ColumnsData = new List<string>();
-                        ColumnsData.Add((k).ToString());
-                        ColumnsData.AddRange(si.Params);
+                        foreach (SensorInfo si in w.Events)
+                        {
+                            var ColumnsData = new List<string>();
+                            ColumnsData.Add((k).ToString());
+                            ColumnsData.AddRange(si.Params);
 
-                        var row = (DataGridViewRow)WavesDataGrid.Rows[0].Clone();
+                            var row = (DataGridViewRow)WavesDataGrid.Rows[0].Clone();
 
-                        int cell_num = 0;
-                        foreach (string cellData in ColumnsData)
-                            row.Cells[cell_num++].Value = cellData;
+                            int cell_num = 0;
+                            foreach (string cellData in ColumnsData)
+                                row.Cells[cell_num++].Value = cellData;
 
-                        if (si.SensorType == "LE")
-                            row.DefaultCellStyle.BackColor = Color.LightGray;
-                        else
-                            row.DefaultCellStyle.BackColor = Color.White;
+                            if (si.SensorType == "LE")
+                                row.DefaultCellStyle.BackColor = Color.LightGray;
+                            else
+                                row.DefaultCellStyle.BackColor = Color.White;
 
-                        WavesDataGrid.Rows.Add(row);
+                            WavesDataGrid.Rows.Add(row);
+                        }
                     }
 
                     k++;
@@ -532,7 +536,6 @@ namespace AEDataAnalyzer
             Plot.SizeMode = PictureBoxSizeMode.Zoom;
             page.Controls.Add(Plot);
             Tabs.Controls.Add(page);
-
         }
 
         private void Menu_Tools_Show_Waves_Click(object sender, EventArgs e)
@@ -583,7 +586,7 @@ namespace AEDataAnalyzer
 
                     List<Wave> CorrectWaves = (from Wave wave in CorrelatedWaves group wave by wave.Events.Count into waveGroup orderby waveGroup.Key select waveGroup.ToList()).LastOrDefault();
 
-                    if (CorrectWaves.Count >= 3)
+                    if (CorrectWaves.Count >= 4)
                     {
                         SuperWave superWave = new SuperWave(CorrectWaves, i);
 
@@ -667,14 +670,27 @@ namespace AEDataAnalyzer
             {
                 using (StreamWriter sw = new StreamWriter(sfd.FileName))
                 {
+                    //int i = 0;
+
                     sw.WriteLine("Num Event Time Channel Amplitude");
                     foreach (Wave w in Waves)
                     {
-                        var firstSITime = w.Events[0].Time;
-                        var firstSIMsec = w.Events[0].MSec;
+                        if (w.Events.Count > 3)
+                        {
+                            if (((w.Events[3].Time - w.Events[1].Time).Milliseconds + (w.Events[3].MSec - w.Events[1].MSec)) > 0.2)
+                            {
+                                var firstSITime = w.Events[0].Time;
+                                var firstSIMsec = w.Events[0].MSec;
 
-                        foreach (SensorInfo si in w.Events)
-                          sw.WriteLine((w.Number + " " + si.SensorType + " " + ((si.Time - firstSITime).Milliseconds + (si.MSec - firstSIMsec)) + " " + si.Channel + " " + si.Amplitude).Replace(",", "."));
+                                foreach (SensorInfo si in w.Events)
+                                {
+                                    sw.WriteLine((w.Number + " " + si.SensorType + " " + ((si.Time - firstSITime).Milliseconds + (si.MSec - firstSIMsec)) + " " + si.Channel + " " + si.Amplitude).Replace(",", "."));
+                                    //sw.WriteLine((i + " " + si.SensorType + " " + ((si.Time - firstSITime).Milliseconds + (si.MSec - firstSIMsec)) + " " + si.Channel + " " + si.Amplitude).Replace(",", "."));
+                                }
+
+                                //i++;
+                            }
+                        }
                     }
                 }
             }

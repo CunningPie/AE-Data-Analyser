@@ -52,7 +52,6 @@ F:\GitHub\AE-Data-Analyser\bin\Debug\Accord.Statistics.xml
 F:\GitHub\AE-Data-Analyser\bin\Debug\DynamicInterop.xml
 F:\GitHub\AE-Data-Analyser\bin\Debug\RDotNet.xml
 F:\GitHub\AE-Data-Analyser\bin\Debug\RDotNet.NativeLibrary.xml
-F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.csprojResolveAssemblyReference.cache
 F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.CorrelationOptions.resources
 F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.MainView.resources
 F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.Properties.Resources.resources
@@ -62,3 +61,5 @@ F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.csproj.CoreCompileInputs.cac
 F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.csproj.CopyComplete
 F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.exe
 F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.pdb
+F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.csproj.AssemblyReference.cache
+F:\GitHub\AE-Data-Analyser\obj\Debug\AEDataAnalyzer.csproj.SuggestedBindingRedirects.cache
